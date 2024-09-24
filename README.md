@@ -1,7 +1,21 @@
 ## DHSampling: Diversity-based Hyperedge Sampling in GNN Learning
 
-> "UinTSeg: Unified Infant Brain Tissue Segmentation with Anatomy Delineation", Workshop on _MLMI_, _MICCAI 2024_, [Jiameng Liu, Furkan Pala, <u>Islem Rekik</u>, and <u>Dinggang Shen</u>]
+> "DHSampling: Diversity-based Hyperedge Sampling in GNN Learning with Application to Medical Image Classification", Workshop on _MLMI_, _MICCAI 2024_, [Jiameng Liu, Furkan Pala, <u>Islem Rekik</u>, and <u>Dinggang Shen</u>]
 
+
+### Install
+
+* Clone this repo and install corresponding requirement in `requirements.txt`
+
+    `git clone https://github.com/basiralab/DHSampling.git`
+  
+    `pip install -r requirements`
+
+### Data Preparation
+We train and validate our proposed DHSampling on two publicly available MedMNIST data (_i.e._,OrganCMNIST, OrganSMNIST)
+
+***
+This implementation is highly inspired by _ClusterGCN_ in this [Repo](https://github.com/benedekrozemberczki/ClusterGCN)
 
 ## [<font color=#F8B48F size=3>License</font> ](./LICENSE)
 ```
