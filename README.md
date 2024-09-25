@@ -2,7 +2,7 @@
 
 > "DHSampling: Diversity-based Hyperedge Sampling in GNN Learning with Application to Medical Image Classification", Workshop on _MLMI_, _MICCAI 2024_, [Jiameng Liu, Furkan Pala, <u>Islem Rekik</u>, and <u>Dinggang Shen</u>]
 
-![这是图片](./Figures/framework.png)
+![这是图片](./Figures/framework.jpeg)
 
 ### Install
 
