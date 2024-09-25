@@ -52,29 +52,6 @@ class GCN(torch.nn.Module):
         return torch.log_softmax(out, dim=-1)
 
 
-class GraphSAGEBasic(torch.nn.Module):
-    def __init__(self, in_dim, hidden_dim, out_dim, dropout=0.2):
-        super().__init__()
-        self.dropout = dropout
-        self.conv1 = SAGEConv(in_dim, hidden_dim)
-        self.conv2 = SAGEConv(hidden_dim, hidden_dim)
-        self.conv3 = SAGEConv(hidden_dim, out_dim)
-
-    def forward(self, x, adj_t):
-        x = self.conv1(x, adj_t)
-        x = F.elu(x)
-        x = F.dropout(x, p=self.dropout)
-
-        x = self.conv2(x, adj_t)
-        x = F.elu(x)
-        x = F.dropout(x, p=self.dropout)
-
-        x = self.conv3(x, adj_t)
-        x = F.elu(x)
-        x = F.dropout(x, p=self.dropout)
-        return torch.log_softmax(x, dim=-1)
-
-
 class ClusterGCNTrainer(object):
     """
     Training a ClusterGCN.
@@ -100,13 +77,6 @@ class ClusterGCNTrainer(object):
         # TODO: define GCN model
         self.model = GCN(self.clustering_machine.feature_count,32, self.clustering_machine.class_count)
         self.test_model = GCN(self.clustering_machine.feature_count, 32, self.clustering_machine.class_count)
-
-        # # TODO: define GraphSAGE model using PyG package
-        # self.model = GraphSAGE(in_channels=self.clustering_machine.feature_count, hidden_channels=16, num_layers=2, out_channels=self.clustering_machine.class_count, dropout=0.2)
-        # self.test_model = GraphSAGE(in_channels=self.clustering_machine.feature_count, hidden_channels=32, num_layers=3, out_channels=self.clustering_machine.class_count, dropout=0.2)
-
-        # TODO: define GraphSAGE using Full-batch PyG model
-        # self.model = GraphSAGEBasic(self.clustering_machine.feature_count, 16, self.clustering_machine.class_count, dropout=0.2)
         self.model = self.model.to(self.device)
 
     def do_forward_pass(self, cluster):
@@ -125,8 +95,6 @@ class ClusterGCNTrainer(object):
 
         predictions = self.model(features, edges)
         average_loss = torch.nn.functional.nll_loss(predictions[train_nodes], target[train_nodes])
-        # predictions = self.model(features, edges, batch_size=1, num_sampled_nodes_per_hop=2)
-        # average_loss = torch.nn.functional.cross_entropy(predictions[train_nodes], target[train_nodes])
 
         node_count = train_nodes.shape[0]
         return average_loss, node_count

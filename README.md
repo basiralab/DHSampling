@@ -24,7 +24,22 @@ We train and validate our proposed DHSampling on two publicly available MedMNIST
 
     `python ./DataPrepare/GraphConstruction.py --medmnist_npy /folder/to/processed/data --medmnist_garph /folder/to/save/graph`
 
+4. Copy corresponding converted graph into `./GCN/input`, `./GAT/input`
+
+
 ### Training and Evaluation
+* Script for DHSampling on `OrganCMNIST` based on `GCN`
+  * Change `file_folder=organc` in file `./GCN/src/parse.py`
+  * `sh ./run/OrganCMNIST_GCN.sh`
+* Script for DHSampling on `OrganSMNIST` based on `GCN`
+  * Change `file_folder=organs` in file `./GCN/src/parse.py`
+  * `sh ./run/OrganSMNIST_GCN.sh`
+* Script for DHSampling on `OrganCMNIST` based on `GAT`
+  * Change `file_folder=organc` in file `./GAT/src/parse.py`
+  * `sh ./run/OrganCMNIST_GAT.sh`
+* Script for DHSampling on `OrganSMNIST` based on `GAT`
+  * Change `file_folder=organs` in file `./GAT/src/parse.py`
+  * `sh ./run/OrganSMNIST_GAT.sh`
 
 
 ***
